@@ -122,6 +122,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* AÑADIDO: Aplicamos la animación de fade-in a toda la página al cargar */
+    animation: page-fade-in 0.5s ease-out;
   }
 }
 
@@ -176,6 +178,29 @@
       transform: scale(1);
     }
   }
+    /* AÑADIDO: Keyframes para la animación de carga de página */
+  @keyframes page-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* AÑADIDO: Clases para animaciones de hover en links de navegación */
+  /* Úsalo así en tu HTML: <a href="..." class="nav-link">Inicio</a> */
+  .nav-link-hover {
+    @apply relative py-1; /* Ajusta 'py-1' según tu diseño */
+  }
+  /* Esta es la línea que se anima */
+  .nav-link-hover::after {
+    @apply content-[''] absolute bottom-0 left-0 h-[2px] w-full scale-x-0;
+    @apply origin-bottom-right transition-transform duration-300 ease-out;
+    @apply bg-primary; /* Usa el color primario para la línea */
+  }
+  .nav-link-hover:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
 
   .animate-slide-up {
     animation: slide-up 0.6s ease-out;
@@ -208,4 +233,5 @@
   .delay-400 {
     animation-delay: 0.4s;
   }
+
 }
